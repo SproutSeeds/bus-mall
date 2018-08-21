@@ -18,7 +18,10 @@ img{
     height: 250px;
 }
 
-canvas {
+div {
     width: 500px;
-    margin: 0 auto;
+    height: 800px;
+    margin: 20px 0px 0px 50px;
+    outline: dotted 5px red;
+    color: black;
 }
