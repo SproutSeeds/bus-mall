@@ -4,6 +4,7 @@
 var imageElement1 = document.getElementById('left-image');
 var imageElement2 = document.getElementById('center-image');
 var imageElement3 = document.getElementById('right-image');
+var container = document.getElementById('container');
 
 var previous1 = -1;
 var previous2 = -1;
@@ -16,8 +17,9 @@ var allImages = [];
 
 function ConstructorImage(name) {
   this.name = name;
-  this.amountOfClicks = 0;
+  this.amountShown = 0;
   this.path = `img/${name}.jpg`;
+  this.amountOfClicks = 0;
 
   allImages.push(this);
 }
@@ -30,22 +32,24 @@ allImageTitles.forEach(function(title){
 
 /////////Function Declarations Live here///////////
 function showRandomImage() {
-  console.log('previous', previous1, previous2, previous3);
+  // console.log('previous', previous1, previous2, previous3);
 
   var randomNumber1 = giveRandomNumber();
   while(randomNumber1 === previous1 || randomNumber1 === previous2 || randomNumber1 === previous3) {
     randomNumber1 = giveRandomNumber();
-    console.log('WE ARE IN THE LOOP FOR RANDOM NUMBER 1');
+    // console.log('WE ARE IN THE LOOP FOR RANDOM NUMBER 1');
   }
   imageElement1.src = allImages[randomNumber1].path;
-  allImages[randomNumber1].amountOfClicks++;
+  imageElement1.title = allImageTitles[randomNumber1];
+  allImages[randomNumber1].amountShown++;
 
   var randomNumber2 = giveRandomNumber();
   while(randomNumber2 === randomNumber1 || randomNumber2 === previous1 || randomNumber2 === previous2 || randomNumber2 === previous3){
     randomNumber2 = giveRandomNumber();
   }
   imageElement2.src = allImages[randomNumber2].path;
-  allImages[randomNumber2].amountOfClicks++;
+  imageElement2.title = allImageTitles[randomNumber2];
+  allImages[randomNumber2].amountShown++;
 
   var randomNumber3 = giveRandomNumber();
   while(randomNumber3 === randomNumber1 || randomNumber3 === randomNumber2 || randomNumber3 === previous3 || randomNumber3 === previous2 || randomNumber3 === previous1){
@@ -53,22 +57,24 @@ function showRandomImage() {
   }
 
   imageElement3.src = allImages[randomNumber3].path;
-  allImages[randomNumber3].amountOfClicks++;
+  imageElement3.title = allImageTitles[randomNumber3];
+  allImages[randomNumber3].amountShown++;
 
   previous1 = randomNumber1;
   previous2 = randomNumber2;
   previous3 = randomNumber3;
-  console.log('Current', randomNumber1, randomNumber2, randomNumber3);
-  console.log('====================');
+  // console.log('Current', randomNumber1, randomNumber2, randomNumber3);
+  // console.log('====================');
+}
 
-    // var ulElement = document.getElementById('image-list');
-//     // var liElement = document.createElement('li');
- //     for(var i = 0; i < allImages.length; i++) {
-//       console.log(`${allImages[i].amountOfClicks} votes for ${allImages[i].name}`);
-//     }
-//   }else{
-//     console.log('nothing happened.');
-//   }
+function renderList() {
+  var ulElement = document.getElementById('render-list');
+  var liElement = document.createElement('li');
+  for(var i = 0; i < allImages.length; i++) {
+    liElement = document.createElement('li');
+    liElement.textContent = `${allImages[i].amountOfClicks} votes for ${allImages[i].name}.`;
+    ulElement.appendChild(liElement);
+  }
 }
 
 function giveRandomNumber() {
@@ -76,42 +82,60 @@ function giveRandomNumber() {
   return randomNumber;
 }
 
-function removeEventListeners() {
-  imageElement1.removeEventListener('click', event, false);
-  imageElement2.removeEventListener('click', event, false);
-  imageElement3.removeEventListener('click', event, false);
+function endGame() {
+  container.removeEventListener('click', handleClick, false);
+  renderList();
 }
 
-/////////EVENT LISTENERS LIVE HERE///////////
-imageElement1.addEventListener('click', function(event) {
-  showRandomImage(event);
+function handleClick(event){
   console.log(event.target);
+  for(var i = 0; i < allImages.length; i++) {
+    if(allImages[i].name === event.target.title){
+      console.log(allImages[i]);
+      allImages[i].amountOfClicks++;
+      console.log(allImages[i]);
+    }
+  }
   count++;
   if(count >= 25) {
-    removeEventListeners();
-    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
+    endGame();
   }
-});
+  showRandomImage();
+}
+/////////EVENT LISTENER LIVES HERE///////////
+container.addEventListener('click', handleClick);
 
-imageElement2.addEventListener('click', function(event) {
-  showRandomImage(event);
-  console.log(event.target);
-  count++;
-  if(count >= 25) {
-    removeEventListeners();
-    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
-  }
-});
 
-imageElement3.addEventListener('click', function(event) {
-  showRandomImage(event);
-  console.log(event.target);
-  count++;
-  if(count >= 25) {
-    removeEventListeners();
-    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
-  }
-});
+
+// imageElement1.addEventListener('click', function(event) {
+//   if(count < 25) {
+//     console.log(event.target);
+//     showRandomImage(event);
+//     count++;
+//   } else{
+//     renderList();
+//   }
+// });
+
+// imageElement2.addEventListener('click', function(event) {
+//   if(count < 25) {
+//     console.log(event.target);
+//     showRandomImage(event);
+//     count++;
+//   } else{
+//     renderList();
+//   }
+// });
+
+// imageElement3.addEventListener('click', function(event) {
+//   if(count < 25) {
+//     console.log(event.target);
+//     showRandomImage(event);
+//     count++;
+//   } else{
+//     renderList();
+//   }
+// });
 
 showRandomImage();
 
