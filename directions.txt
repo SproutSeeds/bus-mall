@@ -1,0 +1,18 @@
+Lab-12
+
+Charts will be looking for titles and the amount of votes.
+
+We need to create a separate array of votes
+
+We need to create a separate array of titles
+
+We will pass these arrays to the bar charts for reading a rendering the chart data.
+
+Changing the type of chart within the drawChart function It will change the chart. 
+
+Easing property will determine how fast or slow the chart render will be.
+
+Responsive option will make the chart responsive to smaller screens.
+
+Make sure to add a counter to tally the amount of times pictures are shown to the user.
+-This counter will be located within the function that is showing a random picture after each 1,2,3 random number generated. 

@@ -1,5 +1,6 @@
 'use strict';
 
+///////Global Variables live here///////
 var imageElement1 = document.getElementById('left-image');
 var imageElement2 = document.getElementById('center-image');
 var imageElement3 = document.getElementById('right-image');
@@ -10,6 +11,7 @@ var previous3 = -1;
 
 var count = 0;
 
+///////////Arrays Live Here/////////
 var allImages = [];
 
 function ConstructorImage(name) {
@@ -25,7 +27,8 @@ var allImageTitles = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubble
 allImageTitles.forEach(function(title){
   new ConstructorImage(title);
 });
-//This function gives random numbers to my three randomNumber variables.
+
+/////////Function Declarations Live here///////////
 function showRandomImage() {
   console.log('previous', previous1, previous2, previous3);
 
@@ -58,21 +61,9 @@ function showRandomImage() {
   console.log('Current', randomNumber1, randomNumber2, randomNumber3);
   console.log('====================');
 
-//   if(count >= 25)
-//   {
-//     imageElement1.removeEventListener('click', function(event) {
-//       showRandomImage(event);});
-//     imageElement2.removeEventListener('click', function(event) {
-//       showRandomImage(event);});
-//     imageElement3.removeEventListener('click', function(event) {
-//       showRandomImage(event);});
-
-//     console.log('WE MADE IT!');
-//     window.location.href = 'graph.html';
-//     // var ulElement = document.getElementById('image-list');
+    // var ulElement = document.getElementById('image-list');
 //     // var liElement = document.createElement('li');
-
-//     for(var i = 0; i < allImages.length; i++) {
+ //     for(var i = 0; i < allImages.length; i++) {
 //       console.log(`${allImages[i].amountOfClicks} votes for ${allImages[i].name}`);
 //     }
 //   }else{
@@ -85,23 +76,41 @@ function giveRandomNumber() {
   return randomNumber;
 }
 
+function removeEventListeners() {
+  imageElement1.removeEventListener('click', event, false);
+  imageElement2.removeEventListener('click', event, false);
+  imageElement3.removeEventListener('click', event, false);
+}
 
+/////////EVENT LISTENERS LIVE HERE///////////
 imageElement1.addEventListener('click', function(event) {
   showRandomImage(event);
   console.log(event.target);
   count++;
+  if(count >= 25) {
+    removeEventListeners();
+    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
+  }
 });
 
 imageElement2.addEventListener('click', function(event) {
   showRandomImage(event);
   console.log(event.target);
   count++;
+  if(count >= 25) {
+    removeEventListeners();
+    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
+  }
 });
 
 imageElement3.addEventListener('click', function(event) {
   showRandomImage(event);
   console.log(event.target);
   count++;
+  if(count >= 25) {
+    removeEventListeners();
+    console.log(`We are in if statement within Event Listener. And count is at ${count}`);
+  }
 });
 
 showRandomImage();

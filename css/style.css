@@ -1,3 +1,12 @@
+section {
+    width:990px;
+    margin: 0px auto;
+}
+
+ul {
+    margin: 200px 0px 0px 0px;
+}
+
 li {
     display: inline-block;
     margin: 30px;
@@ -6,4 +15,10 @@ li {
 
 img{
     width:250px;
+    height: 250px;
+}
+
+canvas {
+    width: 500px;
+    margin: 0 auto;
 }
