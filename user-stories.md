@@ -1,6 +1,8 @@
 #User Stories
 
-MARKETING
+
+
+#MARKETING
 As the marketing team I want to keep track of how many times each product image is clicked on.
 
 As the marketing team I want a visual demographic of the amount of clicks matching up with the image name.
@@ -11,7 +13,7 @@ As the marketing team I want to see smooth transitions between images and make s
 
 
 
-CONSUMER
+#CONSUMER
 As the consumer I do not want to see too many repeat images.
 
 As the consumer I want to have a saved item list for me to see at the end of the selecting process.
@@ -21,7 +23,7 @@ As the consumer I want to see pictures that are big enough to comfortably look a
 As the consumer I want to have this site be functional on my iphone.
 
 
-DEVELOPER
+#DEVELOPER
 As the developer I will write clean and organized code. 
 
 As the developer I will display images randomly.
