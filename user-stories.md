@@ -3,8 +3,11 @@
 MARKETING
 As the marketing team I want to keep track of how many times each product image is clicked on.
 
-As the marketing team I want a visual demographic 
+As the marketing team I want a visual demographic of the amount of clicks matching up with the image name.
 
+As the marketing team I want the images to be centered in the page.
+
+As the marketing team I want to see smooth transitions between images and make sure there aren't duplicates.
 
 
 
