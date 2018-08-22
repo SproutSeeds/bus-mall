@@ -68,16 +68,6 @@ function showRandomImage() {
   // console.log('====================');
 }
 
-function renderList() {
-  var ulElement = document.getElementById('render-list');
-  var liElement = document.createElement('li');
-  for(var i = 0; i < allImages.length; i++) {
-    liElement = document.createElement('li');
-    liElement.textContent = `${allImages[i].amountOfClicks} votes for ${allImages[i].name}.`;
-    ulElement.appendChild(liElement);
-  }
-}
-
 function giveRandomNumber() {
   var randomNumber = Math.floor(allImages.length * Math.random());
   return randomNumber;
