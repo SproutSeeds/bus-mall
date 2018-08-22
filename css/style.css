@@ -1,5 +1,17 @@
-* {
+/* * {
     border: 2px dotted red;
+} */
+h1 {
+    font-size: 70px;
+    color: deepskyblue;
+    text-align: center;
+    margin: 40px;
+}
+h2 {
+    font-size: 22px;
+    color: maroon;
+    text-align: center;
+    margin: 100px 0px 0px 0px;
 }
 
 section {
@@ -8,7 +20,7 @@ section {
 }
 
 ul {
-    margin: 200px 0px 0px 0px;
+    margin: 100px 0px 0px 0px;
 }
 
 li {

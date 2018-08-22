@@ -11,25 +11,25 @@ var previous2 = -1;
 var previous3 = -1;
 
 var count = 0;
+var userCount = 0;
 
 ///////////Arrays Live Here/////////
 var allImages = [];
 var voterCounter = [];
-
-function ConstructorImage(name) {
+//gave this constructor function a new signature in relative to its properties
+function ConstructorImage(name, amountShown, amountOfClicks) {
   this.name = name;
-  this.amountShown = 0;
+  this.amountShown = amountShown || 0;
   this.path = `img/${name}.jpg`;
-  this.amountOfClicks = 0;
+  this.amountOfClicks = amountOfClicks || 0;
 
   allImages.push(this);
 }
 
 var allImageTitles = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
-allImageTitles.forEach(function(title){
-  new ConstructorImage(title);
-});
+//Local Storage check
+window.onload = objectInstorageCheck();
 
 /////////Function Declarations Live here///////////
 function showRandomImage() {
@@ -75,11 +75,15 @@ function giveRandomNumber() {
 
 function endGame() {
   container.removeEventListener('click', handleClick, false);
-  // hide the container element
+
   for(var i = 0; i < allImages.length; i++){
     voterCounter[i] = allImages[i].amountOfClicks;
   }
+  userCount = 0;
+  localStorage.setItem('user-count', userCount);
+  // hide the container element
   container.style.display = 'none';
+  localStorage.setItem('images-array', JSON.stringify(allImages));
   chartCreation();
 }
 
@@ -92,9 +96,14 @@ function handleClick(event){
       console.log(allImages[i]);
     }
   }
+  localStorage.setItem('images-array', JSON.stringify(allImages));
+
   count++;
   if(count >= 25) {
     endGame();
+  } else {
+    localStorage.setItem('user-count', count);
+
   }
   showRandomImage();
 }
@@ -128,7 +137,7 @@ function chartCreation(){
           'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
           'rgba(255, 159, 64, 0.2)',
-          
+
         ],
         borderColor: [
           'rgba(153, 102, 255, 1)',
@@ -169,6 +178,25 @@ function chartCreation(){
 /////////EVENT LISTENER LIVES HERE///////////
 container.addEventListener('click', handleClick);
 
+function objectInstorageCheck() {
+
+  if(!localStorage.getItem('images-array')){
+    allImageTitles.forEach(function(title){
+      new ConstructorImage(title);
+    });
+    console.log('You do not have the allImages array of objects in locale storage.');
+  } else {
+    count = JSON.parse(localStorage.getItem('user-count'));
+    var retrievedObjects = JSON.parse(localStorage.getItem('images-array'));
+    console.log(retrievedObjects);
+    retrievedObjects.forEach(function(product) {
+      new ConstructorImage(product.name, product.amountShown, product.amountOfClicks);
+    });
+    console.log('You do have the allImages array in locale storage');
+  }
+}
+
 showRandomImage();
+
 
 
