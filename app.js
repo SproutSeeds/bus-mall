@@ -14,6 +14,7 @@ var count = 0;
 
 ///////////Arrays Live Here/////////
 var allImages = [];
+var voterCounter = [];
 
 function ConstructorImage(name) {
   this.name = name;
@@ -84,7 +85,12 @@ function giveRandomNumber() {
 
 function endGame() {
   container.removeEventListener('click', handleClick, false);
-  renderList();
+  // hide the container element
+  for(var i = 0; i < allImages.length; i++){
+    voterCounter[i] = allImages[i].amountOfClicks;
+  }
+  container.style.display = 'none';
+  chartCreation();
 }
 
 function handleClick(event){
@@ -102,40 +108,76 @@ function handleClick(event){
   }
   showRandomImage();
 }
+function chartCreation(){
+  var ctx = document.getElementById('canvas').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: allImageTitles,
+      datasets: [{
+        label: '# of Votes',
+        data: voterCounter,
+        backgroundColor: [
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          
+        ],
+        borderColor: [
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
 /////////EVENT LISTENER LIVES HERE///////////
 container.addEventListener('click', handleClick);
-
-
-
-// imageElement1.addEventListener('click', function(event) {
-//   if(count < 25) {
-//     console.log(event.target);
-//     showRandomImage(event);
-//     count++;
-//   } else{
-//     renderList();
-//   }
-// });
-
-// imageElement2.addEventListener('click', function(event) {
-//   if(count < 25) {
-//     console.log(event.target);
-//     showRandomImage(event);
-//     count++;
-//   } else{
-//     renderList();
-//   }
-// });
-
-// imageElement3.addEventListener('click', function(event) {
-//   if(count < 25) {
-//     console.log(event.target);
-//     showRandomImage(event);
-//     count++;
-//   } else{
-//     renderList();
-//   }
-// });
 
 showRandomImage();
 
